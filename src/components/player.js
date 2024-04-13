@@ -14,19 +14,18 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import { PlayerContext } from "@/context/playerContext";
-import songs from "@/data/songs";
 
 const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 
 export default function MediaCard() {
-  const { controls, index, states } = useContext(PlayerContext);
+  const { controls, currentSong, states } = useContext(PlayerContext);
   const [songInfo, setSongInfo] = useState(null);
   const theme = useTheme();
 
   useEffect(() => {
     axios
       .get(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${songs[index].videoID}&key=${apiKey}`
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${currentSong.videoID}&key=${apiKey}`
       )
       .then((res) => {
         if (res.data.items.length) {
@@ -36,7 +35,7 @@ export default function MediaCard() {
       .catch((err) => {
         console.log(err);
       });
-  }, [index]);
+  }, [currentSong.videoID]);
 
   return (
     <Card sx={{ display: "flex" }}>
