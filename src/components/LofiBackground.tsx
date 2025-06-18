@@ -42,7 +42,7 @@ export function LofiBackground() {
           alt={currentBackground.name}
           fill
           className={`lofi-background transition-opacity duration-1000 object-cover ${
-            imageLoaded ? "opacity-60" : "opacity-0"
+            imageLoaded ? "opacity-100" : "opacity-0"
           }`}
           onLoad={handleImageLoad}
           onError={handleImageError}
@@ -56,13 +56,10 @@ export function LofiBackground() {
         <div
           className="lofi-background bg-gradient-to-br from-orange-100 via-pink-50 to-purple-100 dark:from-orange-900/20 dark:via-pink-900/20 dark:to-purple-900/20"
           style={{
-            opacity: imageError ? 0.6 : 0.3,
+            opacity: imageError ? 1 : 0.3,
           }}
         />
       )}
-
-      {/* Overlay for better text readability */}
-      <div className="fixed inset-0 bg-black/10 dark:bg-black/20 pointer-events-none z-0" />
     </>
   );
 }
